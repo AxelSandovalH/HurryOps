@@ -109,7 +109,7 @@ export default function TruckAnimation() {
               {/* Package on roof */}
               <div ref={packageRef} className="absolute -top-5 left-1/2 -translate-x-1/2 text-sm">📦</div>
               {/* Truck body */}
-              <div className="text-2xl">🚚</div>
+              <div className="text-2xl" style={{ transform: "scaleX(-1)" }}>🚚</div>
             </div>
           </div>
 
