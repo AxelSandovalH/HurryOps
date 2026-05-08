@@ -1,12 +1,10 @@
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import HeroClient from "./components/HeroClient";
 import { FadeInSection, SlideInLeft, SlideInRight, StaggerChildren, CountUp } from "./components/Animations";
 import IntroAnimation from "./components/IntroAnimation";
 import Navbar from "./components/Navbar";
 import ContactForm from "./components/ContactForm";
-
-const Globe = dynamic(() => import("./components/Globe"), { ssr: false });
+import GlobeWrapper from "./components/GlobeWrapper";
 
 export default function Home() {
   return (
@@ -203,7 +201,7 @@ function FeaturesGlobe() {
           {/* Globe */}
           <SlideInLeft>
             <div className="relative">
-              <Globe />
+              <GlobeWrapper />
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/8 border border-white/10 rounded-full px-4 py-1.5 text-xs text-gray-400 font-mono whitespace-nowrap">
                 rastreo en tiempo real
               </div>
