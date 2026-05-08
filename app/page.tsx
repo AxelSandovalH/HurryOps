@@ -5,6 +5,7 @@ import IntroAnimation from "./components/IntroAnimation";
 import Navbar from "./components/Navbar";
 import ContactForm from "./components/ContactForm";
 import GlobeWrapper from "./components/GlobeWrapper";
+import TruckAnimation from "./components/TruckAnimation";
 
 export default function Home() {
   return (
@@ -198,12 +199,17 @@ function FeaturesGlobe() {
         </FadeInSection>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Globe */}
+          {/* Globe (desktop) / Truck (mobile) */}
           <SlideInLeft>
             <div className="relative">
-              <GlobeWrapper />
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/8 border border-white/10 rounded-full px-4 py-1.5 text-xs text-gray-400 font-mono whitespace-nowrap">
-                rastreo en tiempo real
+              <div className="hidden md:block">
+                <GlobeWrapper />
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/8 border border-white/10 rounded-full px-4 py-1.5 text-xs text-gray-400 font-mono whitespace-nowrap">
+                  rastreo en tiempo real
+                </div>
+              </div>
+              <div className="md:hidden">
+                <TruckAnimation />
               </div>
             </div>
           </SlideInLeft>
