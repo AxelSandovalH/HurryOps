@@ -69,6 +69,11 @@ function Problem() {
       title: "El cliente no sabe dónde está su paquete",
       desc: "La pregunta más frecuente: '¿ya llegó?' Sin sistema, cada respuesta es manual y consume tiempo.",
     },
+    {
+      icon: "🚚",
+      title: "Sin control sobre los choferes",
+      desc: "No sabes si el paquete fue entregado, quedó pendiente o se perdió en el camino. Cero trazabilidad en el último tramo.",
+    },
   ];
 
   return (
@@ -81,7 +86,7 @@ function Problem() {
             Operar sin las herramientas correctas es operar a ciegas. Hasta que algo falla.
           </p>
         </FadeInSection>
-        <StaggerChildren className="grid md:grid-cols-3 gap-6" from="scale">
+        <StaggerChildren className="grid sm:grid-cols-2 gap-6" from="scale">
           {pains.map((p, i) => (
             <div key={i} className="rounded-2xl border border-white/8 bg-white/4 p-7 hover:border-accent/30 hover:bg-white/6 transition-all">
               <span className="text-3xl mb-5 block">{p.icon}</span>
