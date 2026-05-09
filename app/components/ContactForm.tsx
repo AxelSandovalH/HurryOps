@@ -31,25 +31,40 @@ export default function ContactForm() {
   const formRef   = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
 
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "loading") return;
     setStatus("loading");
+    setErrorMsg(null);
+
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      name:    (formData.get("name")    as string)?.trim(),
+      company: (formData.get("company") as string)?.trim(),
+      email:   (formData.get("email")   as string)?.trim(),
+      phone:   (formData.get("phone")   as string)?.trim() || undefined,
+      message: (formData.get("message") as string)?.trim() || undefined,
+    };
 
     try {
-      const res = await fetch("https://formspree.io/f/xdablwab", {
+      const res = await fetch("/api/register", {
         method: "POST",
-        body: new FormData(e.currentTarget),
-        headers: { Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
+
+      const data = await res.json();
+
       if (res.ok) {
         setStatus("success");
       } else {
-        throw new Error();
+        setErrorMsg(data.error ?? "Algo salió mal. Intenta de nuevo.");
+        throw new Error(data.error);
       }
     } catch {
       setStatus("error");
-      // Shake
       if (formRef.current) {
         gsap.fromTo(formRef.current,
           { x: -8 }, { x: 0, duration: 0.4, ease: "elastic.out(4, 0.3)" }
@@ -66,8 +81,8 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-white text-xl font-bold mb-2">¡Mensaje recibido!</h3>
-        <p className="text-gray-400 text-sm">Te contactamos en menos de 24 horas.</p>
+        <h3 className="text-white text-xl font-bold mb-2">¡Acceso enviado!</h3>
+        <p className="text-gray-400 text-sm">Revisa tu email — te enviamos un link para entrar al dashboard directamente.</p>
       </div>
     );
   }
@@ -127,12 +142,12 @@ export default function ContactForm() {
 
       {status === "error" && (
         <p className="text-red-400 text-sm text-center flex items-center justify-center gap-2">
-          <span>⚠</span> Algo salió mal. Intenta de nuevo.
+          <span>⚠</span> {errorMsg ?? "Algo salió mal. Intenta de nuevo."}
         </p>
       )}
 
       <p className="text-gray-600 text-xs text-center">
-        Sin spam. Te contactamos directamente en menos de 24 h.
+        Recibirás un email con acceso inmediato al dashboard. Sin contraseña.
       </p>
     </form>
   );
