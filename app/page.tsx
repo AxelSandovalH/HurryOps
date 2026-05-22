@@ -338,7 +338,17 @@ function Footer() {
         <p className="text-gray-600 text-sm text-center">
           © 2026 HurryOps · Logística EE.UU.–México
         </p>
-        <p className="text-gray-700 text-xs">Todos los derechos reservados</p>
+        <p className="text-gray-700 text-xs">
+          Desarrollado por{" "}
+          <a
+            href="https://axelsandoval.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-500 hover:text-accent transition-colors"
+          >
+            axelsandoval.dev
+          </a>
+        </p>
       </div>
     </footer>
   );
